@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { UpdateAuthCredentialsDto } from './dto/update-auth-credentials.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
@@ -44,11 +45,14 @@ export class AuthController {
     return this.authService.findUserById(id);
   }
 
-  // @Put('user/:id')
-  // @UseGuards(JwtAuthGuard)
-  // upateUser(@Request() req, @Param('id') id: string) {
-  //   return this.authService.updateUser(id, req);
-  // }
+  @Put('me')
+  @UseGuards(JwtAuthGuard)
+  upateUser(
+    @Request() req,
+    @Body() updateAuthCredentialsDto: UpdateAuthCredentialsDto,
+  ) {
+    return this.authService.updateUser(req.user, updateAuthCredentialsDto);
+  }
 
   @Delete('me')
   @UseGuards(JwtAuthGuard)

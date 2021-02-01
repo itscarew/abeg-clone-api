@@ -9,14 +9,15 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './schema/user.schema';
 import { JwtModule } from '@nestjs/jwt';
+import { WalletModule } from 'src/wallet/wallet.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     PassportModule,
+    WalletModule,
     JwtModule.register({
       secret: 'secret',
-      // signOptions: { expiresIn: '10hr' },
     }),
   ],
   controllers: [AuthController],

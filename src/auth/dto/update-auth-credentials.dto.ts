@@ -7,7 +7,7 @@ import {
   IsPhoneNumber,
 } from 'class-validator';
 
-export class AuthCredentialsDto {
+export class UpdateAuthCredentialsDto {
   @IsNotEmpty()
   @IsString()
   fullname: string;
@@ -21,9 +21,4 @@ export class AuthCredentialsDto {
   email: string;
   @IsPhoneNumber(null)
   phoneNumber: string;
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(6, { message: 'Password is too short (6 characters min)' })
-  @MaxLength(20, { message: 'Password is too long (20 characters max)' })
-  password: string;
 }
